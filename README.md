@@ -1,6 +1,6 @@
 A machine learning-powered application that performs **Speech Emotion Recognition (SER)** to classify audio signals into **Negative** and **Non-Negative** categories. This project features a full end-to-end pipeline, from digital signal processing to a responsive web interface.
 
-## 🚀 Overviewgit
+## 🚀 Overview
 The system analyzes vocal characteristics to detect emotional states. It specifically targets "Negative" triggers (such as anger or frustration) and distinguishes them from "Non-Negative" states like neutral or positive speech. 
 
 ### **Key Technical Features:**
