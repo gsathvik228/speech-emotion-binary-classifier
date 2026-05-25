@@ -1,0 +1,4 @@
+Audio_Speech_Actors/
+emotion_model.pkl
+__pycache__/
+*.pyc

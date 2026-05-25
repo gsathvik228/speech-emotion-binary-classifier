@@ -20,7 +20,7 @@ CORS(app)  # Allow requests from the HTML page
 
 # ─── MODEL PATH ───────────────────────────────────────────────────────────────
 # Point this to your dataset to train the model (only needed once)
-DATA_DIRECTORY = r"C:\Users\Sathvik\OneDrive\Desktop\4th Sem\Signal Processing for ML\MICROPROJECT\Audio_Speech_Actors"
+DATA_DIRECTORY = "Audio_Speech_Actors"
 MODEL_FILE = "emotion_model.pkl"
 
 # ─── SIGNAL PROCESSING ────────────────────────────────────────────────────────
@@ -46,7 +46,7 @@ def extract_features(file_path):
 
 # ─── TRAIN & SAVE MODEL ───────────────────────────────────────────────────────
 def train_and_save_model():
-    neg_codes = ['04', '05', '06', '08']
+    neg_codes = ['04', '05', '06', '07']
     features, labels = [], []
 
     print("Training model from dataset...")
@@ -69,6 +69,9 @@ def train_and_save_model():
 
     model = SVC(kernel='poly', degree=3, C=1.0, probability=True)
     model.fit(X_train, y_train)
+
+    acc = model.score(X_test, y_test)
+    print(f"Model accuracy: {acc:.2%}")
 
     with open(MODEL_FILE, 'wb') as f:
         pickle.dump(model, f)
