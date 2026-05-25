@@ -17,10 +17,15 @@ The system analyzes vocal characteristics to detect emotional states. It specifi
 
 ## 📂 Project Structure
 ```text
-├── app.py              # Flask Backend & ML Pipeline
-├── index.html          # Frontend User Interface
-├── emotion_model.pkl   # Serialized SVM Model
-└── requirements.txt    # Project Dependencies
+├── .gitignore           # Excludes dataset & model from version control
+├── app.py               # Flask Backend & ML Pipeline
+├── index.html           # Frontend User Interface
+├── emotion_model.pkl    # Pre-trained SVM Model (included)
+├── requirements.txt     # Project Dependencies
+└── Audio_Speech_Actors/ # RAVDESS dataset (download separately for retraining)
+    ├── Actor_01/
+    ├── Actor_02/
+    └── ...
 ```
 
 ## ⚡ Quick Start
@@ -30,16 +35,32 @@ Ensure you have Python 3.8+ installed.
 
 ### 2. Install Dependencies
 ```bash
-pip install flask flask-cors numpy librosa scipy scikit-learn
+pip install -r requirements.txt
 ```
 
 ### 3. Run the Application
-1. Start the Flask server:
-   ```bash
-   python app.py
-   ```
-2. Open `index.html` in your browser.
-3. Upload a `.wav` file (RAVDESS format) to view the classification and confidence score.
+The app comes with a **pre-trained model** (`emotion_model.pkl`), so you can run it immediately:
+```bash
+python app.py
+```
+Then open `index.html` in your browser and upload a `.wav` file.
+
+## 📥 Dataset (for retraining)
+
+This project uses the **RAVDESS** (Ryerson Audio-Visual Database of Emotional Speech and Song) dataset.
+
+- **Download:** [https://zenodo.org/record/1188976](https://zenodo.org/record/1188976)
+- Download the `Audio_Speech_Actors_01-24.zip` file (~1GB)
+- Extract it into the project root so the folder structure is:
+  ```
+  speech-emotion-binary-classifier/
+  └── Audio_Speech_Actors/
+      ├── Actor_01/
+      ├── Actor_02/
+      ...
+  ```
+- The model will automatically train from this dataset on first run if `emotion_model.pkl` doesn't exist.
+- To retrain after dataset is in place, hit the `/retrain` endpoint or delete `emotion_model.pkl` and restart the server.
 
 ## 🧠 Model Logic
 1.  **Preprocessing:** Raw audio is filtered to remove noise and unwanted frequencies.
